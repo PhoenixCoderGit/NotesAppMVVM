@@ -6,7 +6,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -37,38 +36,32 @@ class MainActivity : ComponentActivity() {
             NotesAppMVVMTheme {
                 // A surface container using the 'background' color from the theme
                 Scaffold(
-
                     topBar = {
                         TopAppBar(
-
                             navigationIcon = {
-                                IconButton(onClick = { /*TODO*/ }) {
-                                    Icon(
-                                        imageVector = Icons.Default.Menu,
-                                        contentDescription = "Menu Icon"
-                                    )
-                                }
+                               IconButton(onClick = { /*TODO*/ }) {
+                                   Icon(
+                                       imageVector = Icons.Default.Menu,
+                                       contentDescription = "Menu Icon"
+                                   )
+                               }
                             },
                             title = {
                                 Text(text = "Notas App")
                             },
                             colors = TopAppBarDefaults.smallTopAppBarColors(
                                 containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp)
-                            ),
-
+                            )
                         )
                     },
-
                     content = {
                         Surface(
                             modifier = Modifier.fillMaxSize(),
-                            color = MaterialTheme.colorScheme.background
-                        )
-                        {
+                            color= MaterialTheme.colorScheme.background
+                        ) {
                             NotesNavHost()
                         }
-                    },
-
+                    }
                 )
 
             }

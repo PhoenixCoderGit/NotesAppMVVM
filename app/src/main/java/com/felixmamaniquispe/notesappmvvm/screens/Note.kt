@@ -16,11 +16,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.felixmamaniquispe.notesappmvvm.MainViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NoteSreen(navController: NavHostController) {
+fun NoteSreen(navController: NavHostController, viewModel: MainViewModel) {
 
     Scaffold(
         modifier = Modifier

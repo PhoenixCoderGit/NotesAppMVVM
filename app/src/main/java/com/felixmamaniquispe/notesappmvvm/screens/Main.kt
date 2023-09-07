@@ -1,7 +1,6 @@
 package com.felixmamaniquispe.notesappmvvm.screens
 
 import android.annotation.SuppressLint
-import android.app.Application
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,39 +17,29 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.felixmamaniquispe.notesappmvvm.MainViewModel
-import com.felixmamaniquispe.notesappmvvm.MainViewModelFactory
 import com.felixmamaniquispe.notesappmvvm.model.Note
 import com.felixmamaniquispe.notesappmvvm.navigation.NavRoute
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainSreen(navController: NavHostController) {
-
-    // viewModel
-    val context = LocalContext.current
-    val mviewModel: MainViewModel =
-        viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
+fun MainSreen(navController: NavHostController, viewModel: MainViewModel) {
 
     //val notes = mviewModel.readTest.observeAsState(listOf()).value
 
     val itemsList = (0..5).toList()
     val itemsIndexedList = listOf("A", "B", "C")
+
+    val notes = viewModel.readAllNotes().observeAsState(listOf()).value
 
     Scaffold(
         floatingActionButton = {
@@ -71,11 +60,11 @@ fun MainSreen(navController: NavHostController) {
             NoteItem(title = "uno", subtitle = "descripcion", navController = navController)
         }*/
 
-        /*LazyColumn{
+        LazyColumn{
             items(notes) { note ->
                 NoteItem(note = note, navController = navController)
             }
-        }*/
+        }
         /*LazyColumn {
             items(itemsList) {
                 Text("Item is $it")

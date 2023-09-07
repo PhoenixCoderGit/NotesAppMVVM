@@ -21,15 +21,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.felixmamaniquispe.notesappmvvm.MainViewModel
+import com.felixmamaniquispe.notesappmvvm.model.Note
 import com.felixmamaniquispe.notesappmvvm.navigation.NavRoute
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddSreen(navController: NavHostController) {
+fun AddSreen(navController: NavHostController, viewModel: MainViewModel) {
 
-    var title by remember { mutableStateOf("")}
-    var subtitle by remember { mutableStateOf("")}
+    var title by remember { mutableStateOf("") }
+    var subtitle by remember { mutableStateOf("") }
+    var isButtonEnabled by remember { mutableStateOf(false) }
 
     Scaffold {
         Column(
@@ -45,20 +48,31 @@ fun AddSreen(navController: NavHostController) {
             )
 
             OutlinedTextField(
-                value = title, 
-                onValueChange = {title = it},
-                label = { Text(text = "titulo Note")}
+                value = title,
+                onValueChange = {
+                    title = it
+                    isButtonEnabled = title.isNotEmpty() && subtitle.isNotEmpty()
+                },
+                label = { Text(text = "titulo Note") },
+                isError = title.isEmpty()
             )
 
             OutlinedTextField(
                 value = subtitle,
-                onValueChange = {subtitle = it},
-                label = { Text(text = "subtitulo Note")}
+                onValueChange = {
+                    subtitle = it
+                    isButtonEnabled = title.isNotEmpty() && subtitle.isNotEmpty()
+                },
+                label = { Text(text = "subtitulo Note") },
+                isError = subtitle.isEmpty()
             )
             Button(
                 modifier = Modifier.padding(top = 16.dp),
+                enabled = isButtonEnabled,
                 onClick = {
-                    navController.navigate(NavRoute.Main.route)
+                    viewModel.addNote(note = Note(title = title, subtitle = subtitle)) {
+                        navController.navigate(NavRoute.Main.route)
+                    }
                 }
             ) {
                 Text(text = "Agregar Nota")

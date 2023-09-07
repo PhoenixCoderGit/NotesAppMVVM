@@ -27,7 +27,7 @@ import com.felixmamaniquispe.notesappmvvm.utils.TYPE_ROOM
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StartSreen(navController: NavHostController) {
+fun StartSreen(navController: NavHostController, viewModel: MainViewModel) {
 
     // viewModel
     val context = LocalContext.current

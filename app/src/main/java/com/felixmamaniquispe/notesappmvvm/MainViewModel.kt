@@ -6,14 +6,17 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.felixmamaniquispe.notesappmvvm.database.room.AppRoomDatabase
+import com.felixmamaniquispe.notesappmvvm.database.room.repository.RoomRepository
 import com.felixmamaniquispe.notesappmvvm.model.Note
+import com.felixmamaniquispe.notesappmvvm.utils.REPOSITORY
 import com.felixmamaniquispe.notesappmvvm.utils.TYPE_FIREBASE
 import com.felixmamaniquispe.notesappmvvm.utils.TYPE_ROOM
 import java.lang.IllegalArgumentException
 
 class MainViewModel(application: Application): AndroidViewModel(application) {
 
-    val readTest: MutableLiveData<List<Note>> by lazy {
+    /*val readTest: MutableLiveData<List<Note>> by lazy {
         MutableLiveData<List<Note>>()
     }
 
@@ -34,11 +37,22 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
                 TYPE_FIREBASE -> listOf()
                 else -> listOf()
             }
-    }
+    }*/
 
-    fun initDatabase(type: String) {
-        dbType.value = type
+    val context = application
+
+    fun initDatabase(type: String, onSuccess: () -> Unit) {
+        //dbType.value = type
         Log.d("checkData", "MainViewModel initDatabase $type")
+        when(type){
+            TYPE_ROOM -> {
+
+                val dao = AppRoomDatabase.getInstance(context = context).getRoomDao()
+                REPOSITORY = RoomRepository(dao)
+                onSuccess()
+
+            }
+        }
     }
 }
 

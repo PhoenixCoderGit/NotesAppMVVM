@@ -52,9 +52,9 @@ fun StartSreen(navController: NavHostController) {
                 onClick = {
 
                     // viewModel
-                    mviewModel.initDatabase(TYPE_ROOM)
-
-                    navController.navigate(route = NavRoute.Main.route)
+                    mviewModel.initDatabase(TYPE_ROOM){
+                        navController.navigate(route = NavRoute.Main.route)
+                    }
                 },
                 modifier = Modifier
                     .width(200.dp)
@@ -67,9 +67,10 @@ fun StartSreen(navController: NavHostController) {
                 onClick = {
 
                     // viewModel
-                    mviewModel.initDatabase(TYPE_FIREBASE)
+                    mviewModel.initDatabase(TYPE_FIREBASE){
+                        navController.navigate(route = NavRoute.Main.route)
+                    }
 
-                    navController.navigate(route = NavRoute.Main.route)
                 },
                 modifier = Modifier
                     .width(200.dp)

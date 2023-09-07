@@ -47,7 +47,7 @@ fun MainSreen(navController: NavHostController) {
     val mviewModel: MainViewModel =
         viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
 
-    val notes = mviewModel.readTest.observeAsState(listOf()).value
+    //val notes = mviewModel.readTest.observeAsState(listOf()).value
 
     val itemsList = (0..5).toList()
     val itemsIndexedList = listOf("A", "B", "C")
@@ -71,11 +71,11 @@ fun MainSreen(navController: NavHostController) {
             NoteItem(title = "uno", subtitle = "descripcion", navController = navController)
         }*/
 
-        LazyColumn{
+        /*LazyColumn{
             items(notes) { note ->
                 NoteItem(note = note, navController = navController)
             }
-        }
+        }*/
         /*LazyColumn {
             items(itemsList) {
                 Text("Item is $it")

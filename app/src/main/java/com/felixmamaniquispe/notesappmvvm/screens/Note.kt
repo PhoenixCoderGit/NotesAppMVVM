@@ -217,6 +217,8 @@ fun NoteSreen(navController: NavHostController, viewModel: MainViewModel, noteId
                     ){
                         Text(text = "Acturalizar")
                     }
+
+
                 }
             }
         }
@@ -231,11 +233,31 @@ fun NoteSreen(navController: NavHostController, viewModel: MainViewModel, noteId
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Button(onClick = {
+            Text(
+                text = note.title,
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(top = 32.dp)
+            )
+            Text(
+                text = note.subtitle,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Light,
+                modifier = Modifier.padding(top = 16.dp)
+            )
 
+            Button(onClick = {
                showSheet = true
             }) {
                 Text(text = "Actualizar")
+            }
+            Button(onClick = {
+                viewModel.deleteNote(note=note){
+                    navController.navigate(NavRoute.Main.route)
+                }
+
+            }) {
+                Text(text = "Eliminar")
             }
         }
     }
@@ -280,6 +302,17 @@ fun BottomSheet(title:String,note:Note,coroutineScope:CoroutineScope,onDismiss: 
                     }
                 ){
                     Text(text = "Acturalizar")
+                }
+                Button(
+                    modifier = Modifier.padding(top = 16.dp),
+                    onClick = {
+                        coroutineScope.launch{
+                            //title = note.title
+                            //bottomSheetState.show()
+                        }
+                    }
+                ){
+                    Text(text = "Eliminar")
                 }
             }
         }

@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.felixmamaniquispe.notesappmvvm.database.room.AppRoomDatabase
 import com.felixmamaniquispe.notesappmvvm.database.room.repository.RoomRepository
 import com.felixmamaniquispe.notesappmvvm.model.Note
@@ -61,6 +62,16 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     fun addNote(note: Note, onSuccess: () -> Unit){
         viewModelScope.launch (Dispatchers.IO){
             REPOSITORY.create(note=note){
+                viewModelScope.launch(Dispatchers.Main) {
+                    onSuccess()
+                }
+            }
+        }
+    }
+
+    fun updateNote(note:Note, onSuccess: () -> Unit){
+        viewModelScope.launch (Dispatchers.IO){
+            REPOSITORY.update(note = note){
                 viewModelScope.launch(Dispatchers.Main) {
                     onSuccess()
                 }

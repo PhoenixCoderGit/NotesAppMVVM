@@ -92,7 +92,7 @@ fun NoteItem(note: Note, navController:NavHostController){
                 horizontal = 24.dp,
             )
             .clickable {
-                navController.navigate(NavRoute.Note.route)
+                navController.navigate(NavRoute.Note.route+"/${note.id}")
             },
         elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
     ){

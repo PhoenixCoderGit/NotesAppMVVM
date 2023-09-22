@@ -50,7 +50,7 @@ android {
 dependencies {
 
     //navegacion
-    implementation("androidx.navigation:navigation-compose:2.7.2")
+    implementation("androidx.navigation:navigation-compose:2.7.3")
 
     // room
     implementation("androidx.room:room-runtime:2.5.2")
@@ -60,7 +60,7 @@ dependencies {
 
     implementation("androidx.compose.runtime:runtime-livedata:1.5.1")
 
-    implementation 'androidx.compose.material3:material3:1.2.0-alpha07'
+    implementation 'androidx.compose.material3:material3:1.2.0-alpha08'
 
     implementation 'androidx.core:core-ktx:1.12.0'
     implementation platform('org.jetbrains.kotlin:kotlin-bom:1.8.0')
